@@ -16,7 +16,7 @@ npm install --save-dev jsxbin-webpack-plugin
 ```
 
 ```js
-const JSXBinWebpackPlugin = require('jsxbin-webpack-plugin)
+const JSXBinWebpackPlugin = require('jsxbin-webpack-plugin')
 
 module.exports = {
   entry: {
