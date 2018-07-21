@@ -54,6 +54,7 @@ workflows:
             tags:
               only: /.*/
       - deploy:
+          context: open-source
           requires:
             - build
           filters:
