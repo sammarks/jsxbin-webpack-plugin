@@ -6,7 +6,8 @@
   "scripts": {
     "prepare": "babel src --out-dir lib",
     "lint": "eslint src",
-    "test": "jest"
+    "test": "jest",
+    "release": "standard-version -r"
   },
   "babel": {
     "presets": [
@@ -62,9 +63,10 @@
     "eslint-plugin-node": "^7.0.1",
     "eslint-plugin-promise": "^3.8.0",
     "eslint-plugin-standard": "^3.1.0",
-    "jest": "^23.4.1",
+    "jest": "^23.6.0",
     "jest-junit": "^5.1.0",
     "rimraf": "^2.6.2",
+    "standard-version": "^4.4.0",
     "webpack": "^3.12.0"
   },
   "peerDependencies": {
