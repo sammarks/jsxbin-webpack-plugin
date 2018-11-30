@@ -1,5 +1,4 @@
 const ModuleFilenameHelpers = require('webpack/lib/ModuleFilenameHelpers')
-const jsxbin = require('jsxbin')
 const os = require('os')
 const path = require('path')
 const fs = require('fs')
@@ -10,6 +9,12 @@ class JSXBinWebpackPlugin {
       throw new TypeError('Argument "options" must be an object.')
     }
     this.test = options.test
+    try {
+      this.jsxbin = require('jsxbin')
+    } catch (err) {
+      console.warn('jsxbin package not found. Not compiling jsx assets.')
+      this.jsxbin = null
+    }
   }
 
   async _compileFile (compilation, fileName) {
@@ -23,7 +28,7 @@ class JSXBinWebpackPlugin {
       fs.unlinkSync(temporaryJSXDestination)
     }
     fs.writeFileSync(temporaryJSDestination, compilation.assets[fileName].source())
-    await jsxbin(temporaryJSDestination, temporaryJSXDestination)
+    await this.jsxbin(temporaryJSDestination, temporaryJSXDestination)
     const jsxContents = fs.readFileSync(temporaryJSXDestination, 'utf8')
     fs.unlinkSync(temporaryJSXDestination)
     compilation.assets[jsxFilename] = {
@@ -47,13 +52,15 @@ class JSXBinWebpackPlugin {
   }
 
   apply (compiler) {
-    compiler.plugin('compilation', (compilation) => {
-      compilation.plugin('optimize-chunk-assets', (chunks, done) => {
-        this._compileChunks(compilation, chunks).then(() => {
-          done()
+    if (this.jsxbin) {
+      compiler.plugin('compilation', (compilation) => {
+        compilation.plugin('optimize-chunk-assets', (chunks, done) => {
+          this._compileChunks(compilation, chunks).then(() => {
+            done()
+          })
         })
       })
-    })
+    }
   }
 }
 

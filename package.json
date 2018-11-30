@@ -48,7 +48,7 @@
     "url": "https://github.com/sammarks/jsxbin-webpack-plugin/issues"
   },
   "homepage": "https://github.com/sammarks/jsxbin-webpack-plugin#readme",
-  "dependencies": {
+  "optionalDependencies": {
     "jsxbin": "^1.5.1"
   },
   "devDependencies": {
