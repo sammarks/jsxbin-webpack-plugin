@@ -1,6 +1,6 @@
 {
   "name": "jsxbin-webpack-plugin",
-  "version": "0.0.4",
+  "version": "1.0.0",
   "description": "A Webpack plugin to JSXbin-pack Extendscript outputs.",
   "main": "lib/index.js",
   "scripts": {
