@@ -6,8 +6,8 @@
 ![License][license]
 ![Issues][issues]
 
-`jsxbin-webpack-plugin` is a Webpack 3.x plugin for compiling ExtendScript into `.jsxbin` files for use in
-Adobe CEP extensions.
+`jsxbin-webpack-plugin` is a Webpack 4.x plugin for compiling ExtendScript into `.jsxbin` files for use in
+Adobe CEP extensions. **If you are looking for Webpack 3.x support, use v0.0.4 and older.**
 
 ## Get Started
 

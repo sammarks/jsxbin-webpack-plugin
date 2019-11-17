@@ -2,6 +2,7 @@ const ModuleFilenameHelpers = require('webpack/lib/ModuleFilenameHelpers')
 const os = require('os')
 const path = require('path')
 const fs = require('fs')
+const { RawSource } = require('webpack-sources')
 
 class JSXBinWebpackPlugin {
   constructor (options) {
@@ -31,10 +32,7 @@ class JSXBinWebpackPlugin {
     await this.jsxbin(temporaryJSDestination, temporaryJSXDestination)
     const jsxContents = fs.readFileSync(temporaryJSXDestination, 'utf8')
     fs.unlinkSync(temporaryJSXDestination)
-    compilation.assets[jsxFilename] = {
-      source: () => jsxContents,
-      size: () => jsxContents.length
-    }
+    compilation.assets[jsxFilename] = new RawSource(jsxContents)
     delete compilation.assets[fileName]
   }
 
@@ -53,8 +51,9 @@ class JSXBinWebpackPlugin {
 
   apply (compiler) {
     if (this.jsxbin) {
-      compiler.plugin('compilation', (compilation) => {
-        compilation.plugin('optimize-chunk-assets', (chunks, done) => {
+      const plugin = { name: this.constructor.name }
+      compiler.hooks.compilation.tap(plugin, (compilation) => {
+        compilation.hooks.optimizeChunkAssets.tapAsync(plugin, (chunks, done) => {
           this._compileChunks(compilation, chunks).then(() => {
             done()
           })

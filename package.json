@@ -4,15 +4,18 @@
   "description": "A Webpack plugin to JSXbin-pack Extendscript outputs.",
   "main": "lib/index.js",
   "scripts": {
-    "prepare": "babel src --out-dir lib",
+    "prepare": "babel src/index.js --out-dir lib",
     "lint": "eslint src",
     "test": "jest",
     "release": "standard-version -r"
   },
+  "jest": {
+    "testEnvironment": "node"
+  },
   "babel": {
     "presets": [
       [
-        "env",
+        "@babel/env",
         {
           "targets": {
             "node": "6"
@@ -27,7 +30,7 @@
       "plugin:jest/recommended"
     ],
     "rules": {
-      "jest/valid-expect": false
+      "jest/valid-expect": 0
     }
   },
   "repository": {
@@ -49,27 +52,30 @@
   },
   "homepage": "https://github.com/sammarks/jsxbin-webpack-plugin#readme",
   "optionalDependencies": {
-    "jsxbin": "^1.5.1"
+    "jsxbin": "^2.0.1"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.3",
-    "babel-preset-env": "^1.7.0",
+    "@babel/cli": "^7.7.0",
+    "@babel/core": "^7.7.2",
+    "@babel/preset-env": "^7.7.1",
     "chai": "^4.1.2",
-    "eslint": "^5.1.0",
-    "eslint-config-standard": "^11.0.0",
-    "eslint-plugin-import": "^2.13.0",
-    "eslint-plugin-jest": "^21.18.0",
-    "eslint-plugin-node": "^7.0.1",
-    "eslint-plugin-promise": "^3.8.0",
-    "eslint-plugin-standard": "^3.1.0",
-    "jest": "^23.6.0",
+    "eslint": "^6.6.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jest": "^23.0.4",
+    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "jest": "^25.0.0",
     "jest-junit": "^5.1.0",
     "rimraf": "^2.6.2",
     "standard-version": "^4.4.0",
-    "webpack": "^3.12.0"
+    "webpack": "^4.41.2"
   },
   "peerDependencies": {
-    "webpack": "^3.0.0"
+    "webpack": "^4.0.0"
+  },
+  "dependencies": {
+    "webpack-sources": "^1.4.3"
   }
 }
